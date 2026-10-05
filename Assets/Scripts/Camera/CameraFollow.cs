@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;
-     public float yOffset = .5f;
+     public float yOffset = 4f;
 
     void Update()
     {
