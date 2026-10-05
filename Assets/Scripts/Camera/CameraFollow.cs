@@ -3,12 +3,13 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;
+     public float yOffset = .5f;
 
     void Update()
     {
         transform.position = new Vector3(
             player.position.x,
-            player.position.y,
+            player.position.y  + yOffset,
             transform.position.z
         );
     }
