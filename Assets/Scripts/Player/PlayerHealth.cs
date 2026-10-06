@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
     private PlayerRespawn playerRespawn;
     private SpriteRenderer spriteRenderer;
 
+    public ScreenFade ScreenFade;
     private bool isDead = false;
 
     void Start()
@@ -24,21 +25,26 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(DieRoutine());
     }
 
-    private IEnumerator DieRoutine()
-    {
-        // Disappear immediately
-        spriteRenderer.enabled = false;
+   private IEnumerator DieRoutine()
+{
+    // Player disappears
+    spriteRenderer.enabled = false;
 
-        // Wait one second
-        yield return new WaitForSeconds(1f);
+    // Fade screen to black
+    yield return StartCoroutine(
+        ScreenFade.FadeToBlack()
+    );
 
-        // Move back to spawn point
-        playerRespawn.Respawn();
+    // Respawn while screen is black
+    playerRespawn.Respawn();
 
-        // Reappear
-        spriteRenderer.enabled = true;
+    // Player is back
+    spriteRenderer.enabled = true;
 
-        // Return alive
-        isDead = false;
-    }
-}
+    // Fade back into the game
+    yield return StartCoroutine(
+        ScreenFade.FadeFromBlack()
+    );
+
+    isDead = false;
+}}
