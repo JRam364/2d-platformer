@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeScreen: {fileID: 597832374}
-  fadeSpeed: 2
+  fadeSpeed: 1
 --- !u!225 &597832374
 CanvasGroup:
   m_ObjectHideFlags: 0

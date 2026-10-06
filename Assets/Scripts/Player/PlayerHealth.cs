@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -25,26 +26,19 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(DieRoutine());
     }
 
-   private IEnumerator DieRoutine()
-{
-    // Player disappears
-    spriteRenderer.enabled = false;
+    private IEnumerator DieRoutine()
+    {
+        // Make player disappear
+        spriteRenderer.enabled = false;
 
-    // Fade screen to black
-    yield return StartCoroutine(
-        ScreenFade.FadeToBlack()
-    );
+        // Fade to black
+        yield return StartCoroutine(
+            ScreenFade.FadeToBlack()
+        );
 
-    // Respawn while screen is black
-    playerRespawn.Respawn();
-
-    // Player is back
-    spriteRenderer.enabled = true;
-
-    // Fade back into the game
-    yield return StartCoroutine(
-        ScreenFade.FadeFromBlack()
-    );
-
-    isDead = false;
-}}
+        // Reload the current level
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().name
+        );
+    }
+}
