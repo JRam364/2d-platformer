@@ -40,5 +40,9 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(
             SceneManager.GetActiveScene().name
         );
+         // Fade from black
+        yield return StartCoroutine(
+            ScreenFade.FadeFromBlack()
+        );
     }
 }
