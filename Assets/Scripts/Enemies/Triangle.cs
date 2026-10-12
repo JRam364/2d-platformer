@@ -44,5 +44,10 @@ public class EnemyPatrol : MonoBehaviour
             playerHealth.Die();
         }
     }
+    if (collision.gameObject.CompareTag("Ground"))
+    {
+        direction *= -1;
+    }
 }
 }
+
