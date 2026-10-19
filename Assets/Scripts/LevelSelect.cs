@@ -11,6 +11,7 @@ public class LevelSelect : MonoBehaviour
 
         for (int i = 0; i < levelButtons.Length; i++)
         {
+        
             levelButtons[i].interactable = i < unlockedLevel;
         }
     }
