@@ -4,34 +4,35 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float rollTorque = 15f;
+    [SerializeField] private float maxAngularSpeed = 500f;
+    [SerializeField] private float jumpForce = 8f;
 
-    public float speed;
-    public float jumpForce = 7f;
-    private Rigidbody2D rb2d;
-    // Start is called before the first frame update
+    private Rigidbody2D rb;
+
     void Start()
     {
-         rb2d = GetComponent<Rigidbody2D> ();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-
-        // Horizontal movement
-        rb2d.velocity = new Vector2(
-            moveHorizontal * speed,
-            rb2d.velocity.y
-        );
-
-         // Jump, add new velocity in positive x direction
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb2d.velocity = new Vector2(
-                rb2d.velocity.x,
-                jumpForce
-            );
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+    }
+
+    void FixedUpdate()
+    {
+        float movement = Input.GetAxis("Horizontal");
+
+        rb.AddTorque(-movement * rollTorque);
+
+        rb.angularVelocity = Mathf.Clamp(
+            rb.angularVelocity,
+            -maxAngularSpeed,
+            maxAngularSpeed
+        );
     }
 }
