@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelEnd : MonoBehaviour
 {
@@ -30,5 +31,14 @@ public class LevelEnd : MonoBehaviour
             ShowVictoryScreen();
         }
         
+    }
+    // Function for button to load next level
+  public void NextLevel()
+    {
+        Time.timeScale = 1f;
+
+        int nextLevel = levelNumber + 1;
+
+        SceneManager.LoadScene(nextLevel.ToString());
     }
 }
