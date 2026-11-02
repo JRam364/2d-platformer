@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+        
     }
 
     void FixedUpdate()
@@ -28,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
         float movement = Input.GetAxis("Horizontal");
 
         rb.AddTorque(-movement * rollTorque);
+
+        rb.velocity = new Vector2(
+            movement * 5f,
+            rb.velocity.y
+        );
 
         rb.angularVelocity = Mathf.Clamp(
             rb.angularVelocity,
