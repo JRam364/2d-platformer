@@ -24,6 +24,11 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
 
         StartCoroutine(DieRoutine());
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.simulated = false; // Disable physics and collisions
+        
     }
 
     private IEnumerator DieRoutine()
@@ -40,9 +45,6 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(
             SceneManager.GetActiveScene().name
         );
-         // Fade from black
-        yield return StartCoroutine(
-            ScreenFade.FadeFromBlack()
-        );
+         
     }
 }
